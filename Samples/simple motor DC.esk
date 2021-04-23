@@ -1,0 +1,217 @@
+{
+  "Devices": [
+    {
+      "$type": "ElectricSketch.Model.Devices.SinglePhaseSupply, ElectricSketch",
+      "Voltage": 12.0,
+      "Frequency": 0.0,
+      "Name": "PWR1",
+      "Position": "100, 180",
+      "Pins": [
+        {
+          "Name": "-"
+        },
+        {
+          "Name": "+"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.RotarySwitch, ElectricSketch",
+      "NumPositions": 3,
+      "NumPoles": 2,
+      "AllowArbitraryPositionChange": false,
+      "CurrentPosition": 1,
+      "AllowIncompatiblePotentials": true,
+      "MomentaryFirstPosition": false,
+      "MomentaryLastPosition": false,
+      "Name": "SW1",
+      "Position": "220, 130",
+      "Pins": [
+        {
+          "Name": "C1"
+        },
+        {
+          "Name": "P11"
+        },
+        {
+          "Name": "P12"
+        },
+        {
+          "Name": "P13"
+        },
+        {
+          "Name": "C2"
+        },
+        {
+          "Name": "P21"
+        },
+        {
+          "Name": "P22"
+        },
+        {
+          "Name": "P23"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.SimpleMotor, ElectricSketch",
+      "Voltage": null,
+      "VoltageTolerance": 20.0,
+      "Frequency": null,
+      "FrequencyTolerance": 15.0,
+      "PolarityMatters": false,
+      "Name": "M1",
+      "Position": "340, 130",
+      "Pins": [
+        {
+          "Name": "A1"
+        },
+        {
+          "Name": "A2"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "310, 230",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "260, 170",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "260, 190",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "370, 170",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    }
+  ],
+  "Connections": [
+    [
+      {
+        "dev": 0,
+        "pin": 1
+      },
+      {
+        "dev": 1,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 0,
+        "pin": 0
+      },
+      {
+        "dev": 1,
+        "pin": 4
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 1
+      },
+      {
+        "dev": 2,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 7
+      },
+      {
+        "dev": 3,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 2,
+        "pin": 0
+      },
+      {
+        "dev": 3,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 3
+      },
+      {
+        "dev": 4,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 4,
+        "pin": 0
+      },
+      {
+        "dev": 5,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 5,
+        "pin": 0
+      },
+      {
+        "dev": 1,
+        "pin": 5
+      }
+    ],
+    [
+      {
+        "dev": 4,
+        "pin": 0
+      },
+      {
+        "dev": 6,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 6,
+        "pin": 0
+      },
+      {
+        "dev": 2,
+        "pin": 1
+      }
+    ]
+  ]
+}

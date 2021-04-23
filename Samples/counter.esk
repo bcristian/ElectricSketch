@@ -1,0 +1,1112 @@
+{
+  "Devices": [
+    {
+      "$type": "ElectricSketch.Model.Devices.SinglePhaseSupply, ElectricSketch",
+      "Voltage": 12.0,
+      "Frequency": 0.0,
+      "Name": "PWR1",
+      "Position": "100, 160",
+      "Pins": [
+        {
+          "Name": "-"
+        },
+        {
+          "Name": "+"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Relay, ElectricSketch",
+      "Function": 0,
+      "Interval": "00:00:01",
+      "Voltage": null,
+      "VoltageTolerance": 20.0,
+      "Frequency": null,
+      "FrequencyTolerance": 15.0,
+      "PolarityMatters": true,
+      "AllowIncompatiblePotentials": true,
+      "NumPoles": 3,
+      "Name": "RL1",
+      "Position": "410, 310",
+      "Pins": [
+        {
+          "Name": "A1"
+        },
+        {
+          "Name": "A2"
+        },
+        {
+          "Name": "B1"
+        },
+        {
+          "Name": "15"
+        },
+        {
+          "Name": "16"
+        },
+        {
+          "Name": "18"
+        },
+        {
+          "Name": "25"
+        },
+        {
+          "Name": "26"
+        },
+        {
+          "Name": "28"
+        },
+        {
+          "Name": "35"
+        },
+        {
+          "Name": "36"
+        },
+        {
+          "Name": "38"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Relay, ElectricSketch",
+      "Function": 0,
+      "Interval": "00:00:01",
+      "Voltage": null,
+      "VoltageTolerance": 20.0,
+      "Frequency": null,
+      "FrequencyTolerance": 15.0,
+      "PolarityMatters": true,
+      "AllowIncompatiblePotentials": true,
+      "NumPoles": 2,
+      "Name": "RL2",
+      "Position": "520, 310",
+      "Pins": [
+        {
+          "Name": "A1"
+        },
+        {
+          "Name": "A2"
+        },
+        {
+          "Name": "B1"
+        },
+        {
+          "Name": "15"
+        },
+        {
+          "Name": "16"
+        },
+        {
+          "Name": "18"
+        },
+        {
+          "Name": "25"
+        },
+        {
+          "Name": "26"
+        },
+        {
+          "Name": "28"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Relay, ElectricSketch",
+      "Function": 0,
+      "Interval": "00:00:01",
+      "Voltage": null,
+      "VoltageTolerance": 20.0,
+      "Frequency": null,
+      "FrequencyTolerance": 15.0,
+      "PolarityMatters": true,
+      "AllowIncompatiblePotentials": true,
+      "NumPoles": 2,
+      "Name": "RL3",
+      "Position": "650, 310",
+      "Pins": [
+        {
+          "Name": "A1"
+        },
+        {
+          "Name": "A2"
+        },
+        {
+          "Name": "B1"
+        },
+        {
+          "Name": "15"
+        },
+        {
+          "Name": "16"
+        },
+        {
+          "Name": "18"
+        },
+        {
+          "Name": "25"
+        },
+        {
+          "Name": "26"
+        },
+        {
+          "Name": "28"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "380, 490",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "490, 490",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "620, 490",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Relay, ElectricSketch",
+      "Function": 0,
+      "Interval": "00:00:01",
+      "Voltage": null,
+      "VoltageTolerance": 20.0,
+      "Frequency": null,
+      "FrequencyTolerance": 15.0,
+      "PolarityMatters": true,
+      "AllowIncompatiblePotentials": true,
+      "NumPoles": 1,
+      "Name": "RL4",
+      "Position": "780, 310",
+      "Pins": [
+        {
+          "Name": "A1"
+        },
+        {
+          "Name": "A2"
+        },
+        {
+          "Name": "B1"
+        },
+        {
+          "Name": "15"
+        },
+        {
+          "Name": "16"
+        },
+        {
+          "Name": "18"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "750, 490",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.NpstSwitch, ElectricSketch",
+      "NumPoles": 1,
+      "Closed": true,
+      "Momentary": true,
+      "AllowIncompatiblePotentials": false,
+      "Name": "SW2",
+      "Position": "260, 490",
+      "Pins": [
+        {
+          "Name": "1"
+        },
+        {
+          "Name": "2"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "130, 490",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.RotarySwitch, ElectricSketch",
+      "NumPositions": 2,
+      "NumPoles": 2,
+      "AllowArbitraryPositionChange": false,
+      "CurrentPosition": 0,
+      "AllowIncompatiblePotentials": true,
+      "MomentaryFirstPosition": false,
+      "MomentaryLastPosition": true,
+      "Name": "SW3",
+      "Position": "300, 90",
+      "Pins": [
+        {
+          "Name": "C1"
+        },
+        {
+          "Name": "P11"
+        },
+        {
+          "Name": "P12"
+        },
+        {
+          "Name": "C2"
+        },
+        {
+          "Name": "P21"
+        },
+        {
+          "Name": "P22"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "360, 380",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "470, 380",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "600, 380",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "730, 380",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "730, 310",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "600, 310",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "470, 310",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "360, 310",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "270, 380",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "450, 320",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "450, 110",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "380, 150",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "360, 270",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "360, 90",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "620, 130",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "820, 280",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "820, 320",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "690, 320",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "690, 240",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "560, 240",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "560, 280",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "470, 240",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "470, 270",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "570, 210",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "480, 280",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "480, 210",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "570, 320",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    }
+  ],
+  "Connections": [
+    [
+      {
+        "dev": 1,
+        "pin": 1
+      },
+      {
+        "dev": 1,
+        "pin": 5
+      }
+    ],
+    [
+      {
+        "dev": 2,
+        "pin": 1
+      },
+      {
+        "dev": 2,
+        "pin": 5
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 0
+      },
+      {
+        "dev": 4,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 4,
+        "pin": 0
+      },
+      {
+        "dev": 5,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 5,
+        "pin": 0
+      },
+      {
+        "dev": 2,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 5,
+        "pin": 0
+      },
+      {
+        "dev": 6,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 6,
+        "pin": 0
+      },
+      {
+        "dev": 3,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 3,
+        "pin": 1
+      },
+      {
+        "dev": 3,
+        "pin": 5
+      }
+    ],
+    [
+      {
+        "dev": 6,
+        "pin": 0
+      },
+      {
+        "dev": 8,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 7,
+        "pin": 0
+      },
+      {
+        "dev": 8,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 7,
+        "pin": 5
+      },
+      {
+        "dev": 7,
+        "pin": 1
+      }
+    ],
+    [
+      {
+        "dev": 9,
+        "pin": 1
+      },
+      {
+        "dev": 4,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 0,
+        "pin": 0
+      },
+      {
+        "dev": 10,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 10,
+        "pin": 0
+      },
+      {
+        "dev": 9,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 0,
+        "pin": 1
+      },
+      {
+        "dev": 11,
+        "pin": 3
+      }
+    ],
+    [
+      {
+        "dev": 11,
+        "pin": 0
+      },
+      {
+        "dev": 11,
+        "pin": 3
+      }
+    ],
+    [
+      {
+        "dev": 12,
+        "pin": 0
+      },
+      {
+        "dev": 13,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 13,
+        "pin": 0
+      },
+      {
+        "dev": 14,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 14,
+        "pin": 0
+      },
+      {
+        "dev": 15,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 15,
+        "pin": 0
+      },
+      {
+        "dev": 16,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 16,
+        "pin": 0
+      },
+      {
+        "dev": 7,
+        "pin": 3
+      }
+    ],
+    [
+      {
+        "dev": 14,
+        "pin": 0
+      },
+      {
+        "dev": 17,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 17,
+        "pin": 0
+      },
+      {
+        "dev": 3,
+        "pin": 3
+      }
+    ],
+    [
+      {
+        "dev": 13,
+        "pin": 0
+      },
+      {
+        "dev": 18,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 18,
+        "pin": 0
+      },
+      {
+        "dev": 2,
+        "pin": 3
+      }
+    ],
+    [
+      {
+        "dev": 12,
+        "pin": 0
+      },
+      {
+        "dev": 19,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 19,
+        "pin": 0
+      },
+      {
+        "dev": 1,
+        "pin": 3
+      }
+    ],
+    [
+      {
+        "dev": 12,
+        "pin": 0
+      },
+      {
+        "dev": 20,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 20,
+        "pin": 0
+      },
+      {
+        "dev": 11,
+        "pin": 3
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 5
+      },
+      {
+        "dev": 21,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 21,
+        "pin": 0
+      },
+      {
+        "dev": 22,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 22,
+        "pin": 0
+      },
+      {
+        "dev": 11,
+        "pin": 2
+      }
+    ],
+    [
+      {
+        "dev": 11,
+        "pin": 5
+      },
+      {
+        "dev": 23,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 9
+      },
+      {
+        "dev": 23,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 6
+      },
+      {
+        "dev": 24,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 11,
+        "pin": 1
+      },
+      {
+        "dev": 25,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 24,
+        "pin": 0
+      },
+      {
+        "dev": 25,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 11,
+        "pin": 4
+      },
+      {
+        "dev": 26,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 3,
+        "pin": 6
+      },
+      {
+        "dev": 26,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 3,
+        "pin": 8
+      },
+      {
+        "dev": 27,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 7,
+        "pin": 5
+      },
+      {
+        "dev": 28,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 27,
+        "pin": 0
+      },
+      {
+        "dev": 28,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 3,
+        "pin": 5
+      },
+      {
+        "dev": 29,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 29,
+        "pin": 0
+      },
+      {
+        "dev": 30,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 30,
+        "pin": 0
+      },
+      {
+        "dev": 31,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 2,
+        "pin": 8
+      },
+      {
+        "dev": 32,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 31,
+        "pin": 0
+      },
+      {
+        "dev": 32,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 11
+      },
+      {
+        "dev": 33,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 2,
+        "pin": 6
+      },
+      {
+        "dev": 34,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 33,
+        "pin": 0
+      },
+      {
+        "dev": 34,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 8
+      },
+      {
+        "dev": 36,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 35,
+        "pin": 0
+      },
+      {
+        "dev": 37,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 36,
+        "pin": 0
+      },
+      {
+        "dev": 37,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 2,
+        "pin": 5
+      },
+      {
+        "dev": 38,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 35,
+        "pin": 0
+      },
+      {
+        "dev": 38,
+        "pin": 0
+      }
+    ]
+  ]
+}

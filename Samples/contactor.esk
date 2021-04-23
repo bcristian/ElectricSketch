@@ -1,0 +1,326 @@
+{
+  "Devices": [
+    {
+      "$type": "ElectricSketch.Model.Devices.SinglePhaseSupply, ElectricSketch",
+      "Voltage": 230.0,
+      "Frequency": 50.0,
+      "Name": "PWR1",
+      "Position": "140, 390",
+      "Pins": [
+        {
+          "Name": "N"
+        },
+        {
+          "Name": "L"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.NpstSwitch, ElectricSketch",
+      "NumPoles": 1,
+      "Closed": false,
+      "Momentary": true,
+      "AllowIncompatiblePotentials": false,
+      "Name": "On",
+      "Position": "360, 490",
+      "Pins": [
+        {
+          "Name": "A_1"
+        },
+        {
+          "Name": "B_1"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.NpstSwitch, ElectricSketch",
+      "NumPoles": 1,
+      "Closed": true,
+      "Momentary": true,
+      "AllowIncompatiblePotentials": false,
+      "Name": "Off",
+      "Position": "300, 370",
+      "Pins": [
+        {
+          "Name": "A_1"
+        },
+        {
+          "Name": "B_1"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Relay, ElectricSketch",
+      "Function": 0,
+      "Interval": "00:00:01",
+      "Voltage": null,
+      "VoltageTolerance": 20.0,
+      "Frequency": null,
+      "FrequencyTolerance": 15.0,
+      "PolarityMatters": true,
+      "AllowIncompatiblePotentials": true,
+      "NumPoles": 2,
+      "Name": "RL1",
+      "Position": "420, 370",
+      "Pins": [
+        {
+          "Name": "A1"
+        },
+        {
+          "Name": "A2"
+        },
+        {
+          "Name": "B1"
+        },
+        {
+          "Name": "15"
+        },
+        {
+          "Name": "16"
+        },
+        {
+          "Name": "18"
+        },
+        {
+          "Name": "25"
+        },
+        {
+          "Name": "26"
+        },
+        {
+          "Name": "28"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Lamp, ElectricSketch",
+      "Voltage": null,
+      "VoltageTolerance": 20.0,
+      "Frequency": null,
+      "FrequencyTolerance": 15.0,
+      "PolarityMatters": false,
+      "Name": "L1",
+      "Position": "640, 340",
+      "Pins": [
+        {
+          "Name": "A"
+        },
+        {
+          "Name": "B"
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "470, 490",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "470, 380",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "170, 600",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "450, 600",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "270, 330",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    },
+    {
+      "$type": "ElectricSketch.Model.Devices.Junction, ElectricSketch",
+      "Name": null,
+      "Position": "670, 600",
+      "Pins": [
+        {
+          "Name": ""
+        }
+      ]
+    }
+  ],
+  "Connections": [
+    [
+      {
+        "dev": 1,
+        "pin": 1
+      },
+      {
+        "dev": 5,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 5,
+        "pin": 0
+      },
+      {
+        "dev": 6,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 6,
+        "pin": 0
+      },
+      {
+        "dev": 3,
+        "pin": 5
+      }
+    ],
+    [
+      {
+        "dev": 0,
+        "pin": 1
+      },
+      {
+        "dev": 2,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 0,
+        "pin": 0
+      },
+      {
+        "dev": 7,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 7,
+        "pin": 0
+      },
+      {
+        "dev": 8,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 8,
+        "pin": 0
+      },
+      {
+        "dev": 3,
+        "pin": 1
+      }
+    ],
+    [
+      {
+        "dev": 3,
+        "pin": 0
+      },
+      {
+        "dev": 1,
+        "pin": 1
+      }
+    ],
+    [
+      {
+        "dev": 3,
+        "pin": 3
+      },
+      {
+        "dev": 2,
+        "pin": 1
+      }
+    ],
+    [
+      {
+        "dev": 1,
+        "pin": 0
+      },
+      {
+        "dev": 2,
+        "pin": 1
+      }
+    ],
+    [
+      {
+        "dev": 2,
+        "pin": 0
+      },
+      {
+        "dev": 9,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 9,
+        "pin": 0
+      },
+      {
+        "dev": 3,
+        "pin": 6
+      }
+    ],
+    [
+      {
+        "dev": 8,
+        "pin": 0
+      },
+      {
+        "dev": 10,
+        "pin": 0
+      }
+    ],
+    [
+      {
+        "dev": 10,
+        "pin": 0
+      },
+      {
+        "dev": 4,
+        "pin": 1
+      }
+    ],
+    [
+      {
+        "dev": 3,
+        "pin": 8
+      },
+      {
+        "dev": 4,
+        "pin": 0
+      }
+    ]
+  ]
+}
