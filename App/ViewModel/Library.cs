@@ -33,7 +33,6 @@ namespace ElectricSketch.ViewModel
 #endif
         }
 
-#if DEBUG
         static void AddSampleData(Library lib)
         {
             var switches = new LibraryFolder() { Name = "Switches & Buttons" };
@@ -109,7 +108,6 @@ namespace ElectricSketch.ViewModel
             misc.Components.Add(Device.FromModel(new Model.Devices.Lamp() { Name = "Lamp" }));
             misc.Components.Add(Device.FromModel(new Model.Devices.Junction() { Name = "Junction" }));
         }
-#endif
     }
 
     public class LibraryFolder
