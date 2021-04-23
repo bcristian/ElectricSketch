@@ -1,8 +1,3 @@
-The goal of the program is to assist in the design and simulation of electrical circuits, especially those used for command and automation of machinery.
-Particularly the niche between "more than I can easily figure out in my head" and "not so complex that it needs (p)spice".
-The area where a relay is sufficiently specified by the coil tension and the type and number of contacts, without caring about the resistance and inductance of the coil.
-
-explain (in the app) the rational for dangerous switch errors.
 
 change cursor based on modifier key when selecting
 
