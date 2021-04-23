@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>Cristian Bontas</Authors>
+    <Description>A library for Undo/Redo.</Description>
+    <Copyright>GPL v3</Copyright>
+    <PackageProjectUrl>https://github.com/bcristian/ElectricSketch</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/bcristian/ElectricSketch</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>

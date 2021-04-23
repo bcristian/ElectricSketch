@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:Lamp}">
+        <DataTemplate.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Style.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </DataTemplate.Resources>
+        <Grid view:DeviceContainer.Device="{Binding}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="{StaticResource propNameColWidth}"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ContentPresenter Grid.ColumnSpan="2" Content="{StaticResource commonProperties}"/>
+            <TextBlock Grid.Row="1" Text="Voltage"/>
+            <ContentPresenter Grid.Row="1" Grid.Column="1" Content="{Binding Voltage}"/>
+            <TextBlock Grid.Row="2" Text="Voltage +/- %"/>
+            <ContentPresenter Grid.Row="2" Grid.Column="1" Content="{Binding VoltageTolerance}"/>
+            <TextBlock Grid.Row="3" Text="Frequency"/>
+            <ContentPresenter Grid.Row="3" Grid.Column="1" Content="{Binding Frequency}"/>
+            <TextBlock Grid.Row="4" Text="Frequency +/-"/>
+            <ContentPresenter Grid.Row="4" Grid.Column="1" Content="{Binding FrequencyTolerance}"/>
+            <TextBlock Grid.Row="5" Text="Polarity matters"/>
+            <ContentPresenter Grid.Row="5" Grid.Column="1" Content="{Binding PolarityMatters}"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

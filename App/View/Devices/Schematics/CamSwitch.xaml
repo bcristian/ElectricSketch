@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:CamSwitch}">
+        <view:SimpleDevice>
+            <view:SimpleDevice.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Style.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </view:SimpleDevice.Resources>
+            <view:SimpleDevice.Template>
+                <ControlTemplate TargetType="view:SimpleDevice">
+                    <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}"
+                            view:PositionContainer.Position="{Binding Position, Converter={StaticResource pConv}}"
+                            view:PositionContainer.Offset="{Binding OriginOffset, Converter={StaticResource pConv}}">
+                        <ItemsControl ItemsSource="{Binding Contacts}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type dev:CamContact}">
+                                    <Canvas>
+                                        <Path Style="{StaticResource DeviceGraphicsStyle}"
+                                              Data="M -5,10 h 10 a 4, 4 360 1 1 0,.1 M 55,10 h -10 a 4, 4 360 1 1 0,-.1"/>
+                                        <Path Style="{StaticResource DeviceGraphicsStyle}"
+                                              Data="M 9,6 h 31"
+                                              Visibility="{Binding Closed, Converter={StaticResource collapsedIfFalse}}"/>
+                                        <Path Style="{StaticResource DeviceGraphicsStyle}"
+                                              Data="M 9,2 h 31"
+                                              Visibility="{Binding Closed, Converter={StaticResource collapsedIfTrue}}"/>
+                                        <ItemsControl ItemsSource="{Binding Positions}" Canvas.Top="16" Width="50">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal" Width="Auto" HorizontalAlignment="Center"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate DataType="{x:Type dev:CamPosition}">
+                                                    <Grid>
+                                                        <Ellipse Width="4" Height="4" StrokeThickness="1" Stroke="Black" Margin="2,0" Visibility="{Binding Pattern, Converter={StaticResource collapsedIfTrue}}"/>
+                                                        <Ellipse Width="4" Height="4" StrokeThickness="1" Stroke="Black" Margin="2,0" Fill="Black" Visibility="{Binding Pattern, Converter={StaticResource collapsedIfFalse}}"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Canvas>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="Canvas.Top" Value="{Binding Index, Converter={StaticResource linConv}, ConverterParameter='5, 20'}"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                        </ItemsControl>
+                    </Canvas>
+                </ControlTemplate>
+            </view:SimpleDevice.Template>
+        </view:SimpleDevice>
+    </DataTemplate>
+</ResourceDictionary>

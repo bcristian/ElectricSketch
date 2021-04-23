@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="ElectricSketch.View.Schematic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:ElectricSketch.View"
+             xmlns:vm="clr-namespace:ElectricSketch.ViewModel"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:Schematic, IsDesignTimeCreatable=True}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <view:PinPosition x:Key="ppConv"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <view:MyItemsControl x:Name="items" ItemsSource="{Binding Elements}">
+            <view:MyItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Focusable="False">
+                        <!--so that it does not steal focus from the canvas-->
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </view:MyItemsControl.Template>
+            <view:MyItemsControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Devices/Schematics/All.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                    <DataTemplate DataType="{x:Type vm:Connection}">
+                        <view:Connection SnapsToDevicePixels="True" view:DeviceContainer.Connection="{Binding}"/>
+                    </DataTemplate>
+                    <Style TargetType="view:Connection">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="view:Connection">
+                                    <Canvas>
+                                        <Line Name="line" StrokeThickness="2" Stroke="Black" SnapsToDevicePixels="True" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                              X1="{Binding LeftA}" Y1="{Binding TopA}" X2="{Binding LeftB}" Y2="{Binding TopB}"/>
+                                        <Button Name="split" Background="Transparent" Content="X" Visibility="Hidden"
+                                                view:PositionCenter.Position="{Binding Mid, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Command="{Binding SplitCommand}"/>
+                                    </Canvas>
+                                    <ControlTemplate.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding IsMouseOver, ElementName=line}" Value="True"/>
+                                                <Condition Binding="{Binding Schematic.InSimulation}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter TargetName="line" Property="Stroke" Value="Red"/>
+                                            <Setter TargetName="split" Property="Visibility" Value="Visible"/>
+                                        </MultiDataTrigger>
+                                        <DataTrigger Binding="{Binding Schematic.InSimulation}" Value="True">
+                                            <Setter TargetName="split" Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                        <!-- no need to also check if in simulation, since the button is not visible in that case-->
+                                        <Trigger SourceName="split" Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="line" Property="Stroke" Value="Red"/>
+                                            <Setter TargetName="split" Property="Visibility" Value="Visible"/>
+                                        </Trigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Schematic.InSimulation}" Value="True"/>
+                                                <Condition Binding="{Binding IsEnergized}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter TargetName="line" Property="Stroke" Value="OrangeRed"/>
+                                        </MultiDataTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Style x:Key="ConnectionStyle" TargetType="ContentControl"/>
+                    <Style x:Key="DeviceStyle" TargetType="ContentControl">
+                        <!--render devices over connections-->
+                        <Setter Property="Panel.ZIndex" Value="1"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ContentControl">
+                                    <Grid view:DeviceContainer.Device="{Binding}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Cursor="SizeAll" Background="Transparent">
+                                            <ContentPresenter/>
+                                            <Rectangle Stroke="Red" StrokeThickness="1" RadiusX="2" RadiusY="2" Visibility="{Binding IsSelected, Converter={StaticResource hiddenIfFalse}}"/>
+                                            <Rectangle Stroke="Red" StrokeThickness="1" RadiusX="2" RadiusY="2" StrokeDashArray="2"
+                                                       Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Converter={StaticResource hiddenIfFalse}}"/>
+                                            <ItemsControl ItemsSource="{Binding Pins}">
+                                                <ItemsControl.Resources>
+                                                    <DataTemplate DataType="{x:Type vm:Pin}">
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition/>
+                                                                <RowDefinition/>
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Canvas Width="10" Height="10" Background="Transparent" Cursor="Cross" view:DeviceContainer.Pin="{Binding}"
+                                                                    Grid.Column="1"
+                                                                    view:PositionContainer.Position="{Binding Offset, Converter={StaticResource pConv}}"
+                                                                    view:PositionContainer.Offset="{Binding DataContext.OriginOffset, Converter={StaticResource pConvLin}, ConverterParameter='5, 5, -1, -1', RelativeSource={RelativeSource AncestorType={x:Type Grid}, AncestorLevel=2}}">
+                                                                <Ellipse Canvas.Left="5" Canvas.Top="5" Width="8" Height="8" StrokeThickness="2" Stroke="Red" Margin="-5"/>
+                                                            </Canvas>
+                                                            <TextBlock Text="{Binding Name}" Grid.Row="1" Grid.Column="0" FontSize="10" Padding="1"
+                                                                       Visibility="{Binding Offset.X, Converter={StaticResource visibleIfLessThan}}"/>
+                                                            <TextBlock Text="{Binding Name}" Grid.Row="1" Grid.Column="2" FontSize="10" Padding="1"
+                                                                       Visibility="{Binding Offset.X, Converter={StaticResource visibleIfMoreThan}}"/>
+                                                            <TextBlock Text="{Binding Name}" Grid.Row="1" Grid.Column="1" FontSize="10" Padding="1"
+                                                                       Visibility="{Binding Offset.X, Converter={StaticResource visibleIfZero}}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.Resources>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <Canvas IsItemsHost="True"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemContainerStyle>
+                                                    <Style TargetType="ContentPresenter">
+                                                        <Setter Property="Visibility" Value="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Converter={StaticResource hiddenIfFalse}}"/>
+                                                    </Style>
+                                                </ItemsControl.ItemContainerStyle>
+                                            </ItemsControl>
+                                        </Grid>
+                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Right" Grid.Row="1"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </view:MyItemsControl.Resources>
+            <view:MyItemsControl.ItemContainerStyleSelector>
+                <view:ElementStyleSelector DeviceStyle="{StaticResource DeviceStyle}" ConnectionStyle="{StaticResource ConnectionStyle}"/>
+            </view:MyItemsControl.ItemContainerStyleSelector>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <view:SchematicCanvas Background="AntiqueWhite" IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </view:MyItemsControl>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Focusable="False"/>
+        <Expander ExpandDirection="Right" Grid.Column="2" FlowDirection="RightToLeft" IsExpanded="True">
+            <Grid FlowDirection="LeftToRight">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MinHeight="80" Height="Auto"/>
+                    <RowDefinition MinHeight="80"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style x:Key="grpBorder" TargetType="Border">
+                        <Setter Property="CornerRadius" Value="2"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="{x:Static SystemColors.WindowFrameBrush}"/>
+                    </Style>
+                </Grid.Resources>
+                <Border Style="{StaticResource grpBorder}">
+                    <!--MaxHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"-->
+                    <view:Minimap x:Name="minimap"/>
+                    <!--Minimap target set in code, as it must be the canvas, but no easy way to do that here-->
+                </Border>
+                <Border Grid.Row="1" Style="{StaticResource grpBorder}">
+                    <Border.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="Devices/Properties/All.xaml"/>
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </Border.Resources>
+                    <Expander Header="Properties" IsExpanded="True">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                        <Setter Property="Margin" Value="0, 3"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <ContentControl Content="{Binding SelectedDevice}" HorizontalContentAlignment="Stretch"
+                                                Visibility="{Binding SelectedDevice, Converter={StaticResource hiddenIfNull}}"/>
+                                <TextBlock Text="Select a single device to view its properties" Visibility="{Binding SelectedDevice, Converter={StaticResource visibleIfNull}}"/>
+                            </Grid>
+                        </ScrollViewer>
+                    </Expander>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource grpBorder}">
+                    <view:HistoryView/>
+                </Border>
+            </Grid>
+        </Expander>
+    </Grid>
+</UserControl>

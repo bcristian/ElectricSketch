@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Junction.xaml"/>
+        <ResourceDictionary Source="Lamp.xaml"/>
+        <ResourceDictionary Source="SinglePhaseSupply.xaml"/>
+        <ResourceDictionary Source="ThreePhaseSupply.xaml"/>
+        <ResourceDictionary Source="NpstSwitch.xaml"/>
+        <ResourceDictionary Source="RotarySwitch.xaml"/>
+        <ResourceDictionary Source="Relay.xaml"/>
+        <ResourceDictionary Source="PairSwitch.xaml"/>
+        <ResourceDictionary Source="CamSwitch.xaml"/>
+        <ResourceDictionary Source="SimpleMotor.xaml"/>
+        <ResourceDictionary Source="ThreePhaseMotor.xaml"/>
+        <ResourceDictionary Source="Transformer.xaml"/>
+        <ResourceDictionary Source="VFD.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

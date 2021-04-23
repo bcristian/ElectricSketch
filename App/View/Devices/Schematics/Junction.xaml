@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:Junction}">
+        <view:SimpleDevice>
+            <view:SimpleDevice.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Style.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </view:SimpleDevice.Resources>
+            <view:SimpleDevice.Template>
+                <ControlTemplate TargetType="view:SimpleDevice">
+                    <Canvas Width="30" Height="30"
+                            view:PositionContainer.Position="{Binding Position, Converter={StaticResource pConv}}"
+                            view:PositionContainer.Offset="15, 15">
+                        <Ellipse Style="{StaticResource DeviceGraphicsStyle}" Width="6" Height="6" Canvas.Left="12" Canvas.Top="12"
+                                 Fill="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}"
+                                 Visibility="{Binding Show, Converter={StaticResource hiddenIfFalse}}"/>
+                    </Canvas>
+                </ControlTemplate>
+            </view:SimpleDevice.Template>
+        </view:SimpleDevice>
+    </DataTemplate>
+</ResourceDictionary>

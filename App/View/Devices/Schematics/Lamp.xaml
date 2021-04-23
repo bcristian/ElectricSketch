@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:Lamp}">
+        <view:SimpleDevice>
+            <view:SimpleDevice.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Style.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </view:SimpleDevice.Resources>
+            <view:SimpleDevice.Template>
+                <ControlTemplate TargetType="view:SimpleDevice">
+                    <Canvas Width="50" Height="50"
+                            view:PositionContainer.Position="{Binding Position, Converter={StaticResource pConv}}"
+                            view:PositionContainer.Offset="25, 25">
+                        <Canvas.Resources>
+                            <Style x:Key="myStyle" TargetType="{x:Type Shape}" BasedOn="{StaticResource DeviceGraphicsStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnergized}" Value="True">
+                                        <Setter Property="Stroke" Value="OrangeRed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Canvas.Resources>
+                        <Path Style="{StaticResource myStyle}">
+                            <Path.Data>
+                                <GeometryGroup>
+                                    <PathGeometry Figures="M -5,25 h 10 m 40,0 h 10 M 10.8577,10.8577 l 28.2825,28.2825 M 39.1421,10.8577 l -28.2825,28.2825"/>
+                                    <EllipseGeometry RadiusX="20" RadiusY="20" Center="25,25"/>
+                                </GeometryGroup>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </view:SimpleDevice.Template>
+        </view:SimpleDevice>
+    </DataTemplate>
+</ResourceDictionary>

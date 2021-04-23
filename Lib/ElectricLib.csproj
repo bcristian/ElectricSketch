@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ElectricLib</RootNamespace>
+    <PackageId>ElectricLib</PackageId>
+    <Authors>Cristian Bontas</Authors>
+    <Company />
+    <Product>ElectricLib</Product>
+    <AssemblyName>ElectricLib</AssemblyName>
+    <Version>0.1.0</Version>
+    <RepositoryUrl>https://github.com/bcristian/ElectricSketch</RepositoryUrl>
+    <Description>A library for simulating electrical circuits.</Description>
+    <Copyright>GPL v3</Copyright>
+    <PackageProjectUrl>https://github.com/bcristian/ElectricSketch</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>

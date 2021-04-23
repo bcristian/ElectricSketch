@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:RotarySwitch}">
+        <DataTemplate.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Style.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </DataTemplate.Resources>
+        <Grid view:DeviceContainer.Device="{Binding}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="{StaticResource propNameColWidth}"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ContentPresenter Grid.ColumnSpan="2" Content="{StaticResource commonProperties}"/>
+            <TextBlock Grid.Row="1" Text="Poles"/>
+            <ContentPresenter Grid.Row="1" Grid.Column="1" Content="{Binding NumPoles}"/>
+            <TextBlock Grid.Row="2" Text="Positions"/>
+            <ContentPresenter Grid.Row="2" Grid.Column="1" Content="{Binding NumPositions}"/>
+            <TextBlock Grid.Row="3" Text="Current position"/>
+            <ContentPresenter Grid.Row="3" Grid.Column="1" Content="{Binding CurrentPosition}"/>
+            <TextBlock Grid.Row="4" Text="Can jump to any position"/>
+            <ContentPresenter Grid.Row="4" Grid.Column="1" Content="{Binding AllowArbitraryPositionChange}"/>
+            <TextBlock Grid.Row="5" Text="AllowIncompatiblePotentials"/>
+            <ContentPresenter Grid.Row="5" Grid.Column="1" Content="{Binding AllowIncompatiblePotentials}"/>
+            <TextBlock Grid.Row="6" Text="Momentary first position"/>
+            <ContentPresenter Grid.Row="6" Grid.Column="1" Content="{Binding MomentaryFirstPosition}"/>
+            <TextBlock Grid.Row="7" Text="Momentary last position"/>
+            <ContentPresenter Grid.Row="7" Grid.Column="1" Content="{Binding MomentaryLastPosition}"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

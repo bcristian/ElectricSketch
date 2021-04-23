@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="ElectricSketch.View.Library"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:ElectricSketch.View"
+             xmlns:vm="clr-namespace:ElectricSketch.ViewModel"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance d:Type=vm:Library, IsDesignTimeCreatable=True}"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{x:Static SystemColors.WindowBrush}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SimpleItemsControl" TargetType="{x:Type ItemsControl}">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <DataTemplate DataType="{x:Type vm:LibraryFolder}">
+                <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="4" Margin="0,2">
+                    <Expander Header="{Binding Name}">
+                        <StackPanel Orientation="Vertical">
+                             <!--components-->
+                            <view:MyItemsControl x:Name="components" ItemsSource="{Binding Components}">
+                                <view:MyItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True"/>
+                                    </ItemsPanelTemplate>
+                                </view:MyItemsControl.ItemsPanel>
+                                <view:MyItemsControl.ItemContainerStyle>
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ContentControl">
+                                                    <view:LibDeviceContainer x:Name="container" MinWidth="80" MinHeight="40" Margin="3">
+                                                        <Grid Background="Transparent">
+                                                            <!--so that we get mouse input-->
+                                                            <Grid>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition/>
+                                                                    <RowDefinition/>
+                                                                </Grid.RowDefinitions>
+                                                                <ContentPresenter/>
+                                                                <TextBlock Grid.Row="1" Text="{Binding Name}" HorizontalAlignment="Center"/>
+                                                            </Grid>
+                                                            <Border x:Name="selMarker" BorderThickness="1" CornerRadius="2" BorderBrush="Red" Visibility="{Binding ElementName=container, Path=IsHighlighted, Converter={StaticResource hiddenIfFalse}}"/>
+                                                        </Grid>
+                                                    </view:LibDeviceContainer>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </view:MyItemsControl.ItemContainerStyle>
+                            </view:MyItemsControl>
+
+                            <!--folders-->
+                            <ItemsControl Name="folders" ItemsSource="{Binding Folders}" Style="{StaticResource SimpleItemsControl}"/>
+                        </StackPanel>
+                    </Expander>
+                </Border>
+            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Devices/Schematics/All.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ItemsControl Name="library" ItemsSource="{Binding Path=Root.Folders}" Style="{StaticResource SimpleItemsControl}" HorizontalAlignment="Stretch"/>
+    </ScrollViewer>
+</UserControl>

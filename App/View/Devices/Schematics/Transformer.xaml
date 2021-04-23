@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:Transformer}">
+        <view:SimpleDevice>
+            <view:SimpleDevice.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Style.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </view:SimpleDevice.Resources>
+            <view:SimpleDevice.Template>
+                <ControlTemplate TargetType="view:SimpleDevice">
+                    <Canvas Width="50" Height="50"
+                            view:PositionContainer.Position="{Binding Position, Converter={StaticResource pConv}}"
+                            view:PositionContainer.Offset="25, 25">
+                        <Canvas.Resources>
+                            <Style x:Key="myStyle" TargetType="{x:Type Shape}" BasedOn="{StaticResource DeviceGraphicsStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnergized}" Value="True">
+                                        <Setter Property="Stroke" Value="OrangeRed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Canvas.Resources>
+                        <Path Style="{StaticResource myStyle}" Data="
+                              M -5,5 h 17
+                              a 5,5 0 1 1 0,10 m 0,0
+                              a 5,5 0 1 1 0,10 m 0,0
+                              a 5,5 0 1 1 0,10 m 0,0
+                              a 5,5 0 1 1 0,10 m 0,0
+                              h -17
+                              M 23,5 v 40
+                              M 27,5 v 40
+                              M 55,5 h -17
+                              a 5,5 0 1 0 0,10 m 0,0
+                              a 5,5 0 1 0 0,10 m 0,0
+                              a 5,5 0 1 0 0,10 m 0,0
+                              a 5,5 0 1 0 0,10 m 0,0
+                              h 17"/>
+                    </Canvas>
+                </ControlTemplate>
+            </view:SimpleDevice.Template>
+        </view:SimpleDevice>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Electric_Sketch_Tests</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+
+    <Version>0.1.0</Version>
+
+    <Authors>Cristian Bontas</Authors>
+
+    <Product>ElectricLib Tests</Product>
+
+    <Description>Tests for ElectricLib</Description>
+
+    <Copyright>GPL v3</Copyright>
+
+    <PackageProjectUrl>https://github.com/bcristian/ElectricSketch</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/bcristian/ElectricSketch</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\ElectricLib.csproj" />
+  </ItemGroup>
+
+</Project>

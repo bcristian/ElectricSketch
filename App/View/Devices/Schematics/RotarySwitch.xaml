@@ -1,0 +1,91 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:RotarySwitch}">
+        <view:SimpleDevice>
+            <view:SimpleDevice.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Style.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </view:SimpleDevice.Resources>
+            <view:SimpleDevice.Template>
+                <ControlTemplate TargetType="view:SimpleDevice">
+                    <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}"
+                            view:PositionContainer.Position="{Binding Position, Converter={StaticResource pConv}}"
+                            view:PositionContainer.Offset="{Binding OriginOffset, Converter={StaticResource pConv}}">
+                        <ItemsControl ItemsSource="{Binding Poles}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type dev:RotaryPole}">
+                                    <Canvas>
+                                        <Path Style="{StaticResource DeviceGraphicsStyle}"
+                                              Canvas.Top="{Binding Center}"
+                                              Data="M -5,0 h 10 a 4, 4 360 1 1 0,.1"/>
+                                        <ItemsControl ItemsSource="{Binding Positions}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <Canvas IsItemsHost="True"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate DataType="{x:Type dev:RotaryPosition}">
+                                                    <Path Style="{StaticResource DeviceGraphicsStyle}"
+                                                          Data="M 55,0 h -10 a 4, 4 360 1 1 0,-.1"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemContainerStyle>
+                                                <Style TargetType="ContentPresenter">
+                                                    <Setter Property="Canvas.Top" Value="{Binding Offset}"/>
+                                                </Style>
+                                            </ItemsControl.ItemContainerStyle>
+                                        </ItemsControl>
+                                        <Line Style="{StaticResource DeviceGraphicsStyle}"
+                                              X1="13" Y1="{Binding Center}" X2="37"
+                                              Y2="{Binding CurrentPosition, Converter={StaticResource linConv}, ConverterParameter='25, 20'}"/>
+                                        <Path Style="{StaticResource DeviceGraphicsStyle}"
+                                              Canvas.Left="37" Canvas.Top="31"
+                                              Visibility="{Binding DataContext.MomentaryFirstPosition.Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type view:SimpleDevice}}, Converter={StaticResource collapsedIfFalse}}"
+                                              Data="M 0,0 l 4,6 l 4,-6"/>
+                                        <Path Style="{StaticResource DeviceGraphicsStyle}"
+                                              Canvas.Left="37" Canvas.Top="{Binding DataContext.NumPositions.Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type view:SimpleDevice}}, Converter={StaticResource linConv}, ConverterParameter='-1, 20'}"
+                                              Visibility="{Binding DataContext.MomentaryLastPosition.Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type view:SimpleDevice}}, Converter={StaticResource collapsedIfFalse}}"
+                                              Data="M 0,0 l 4,-6 l 4,6"/>
+                                    </Canvas>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="Canvas.Top" Value="{Binding Offset}"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                        </ItemsControl>
+                        <Canvas Visibility="{Binding NumPoles.Value, Converter={StaticResource visibleIfMoreThan}, ConverterParameter=1}">
+                            <Line Style="{StaticResource DeviceGraphicsStyle}" StrokeDashArray="2" X1="25" X2="25">
+                                <Line.Y1>
+                                    <MultiBinding Converter="{StaticResource linXYConv}" ConverterParameter="10, 5, 10">
+                                        <Binding Path="NumPositions.Value"/>
+                                        <Binding Path="CurrentPosition.Value"/>
+                                    </MultiBinding>
+                                </Line.Y1>
+                                <Line.Y2>
+                                    <MultiBinding Converter="{StaticResource linXYZConv}" ConverterParameter="10, 0, -15, 10, 20">
+                                        <Binding Path="NumPoles.Value"/>
+                                        <Binding Path="NumPositions.Value"/>
+                                        <Binding Path="CurrentPosition.Value"/>
+                                    </MultiBinding>
+                                </Line.Y2>
+                            </Line>
+                        </Canvas>
+                    </Canvas>
+                </ControlTemplate>
+            </view:SimpleDevice.Template>
+        </view:SimpleDevice>
+    </DataTemplate>
+</ResourceDictionary>

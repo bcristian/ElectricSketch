@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:ElectricSketch.View"
+                    xmlns:dev="clr-namespace:ElectricSketch.ViewModel.Devices">
+    <DataTemplate DataType="{x:Type dev:PairSwitch}">
+        <DataTemplate.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Style.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </DataTemplate.Resources>
+        <Grid view:DeviceContainer.Device="{Binding}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="{StaticResource propNameColWidth}"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ContentPresenter Grid.ColumnSpan="2" Content="{StaticResource commonProperties}"/>
+            <TextBlock Grid.Row="1" Text="Poles"/>
+            <ContentPresenter Grid.Row="1" Grid.Column="1" Content="{Binding NumPoles}"/>
+            <TextBlock Grid.Row="2" Text="Momentary"/>
+            <ContentPresenter Grid.Row="2" Grid.Column="1" Content="{Binding Momentary}"/>
+            <TextBlock Grid.Row="3" Text="AllowIncompatiblePotentials"/>
+            <ContentPresenter Grid.Row="3" Grid.Column="1" Content="{Binding AllowIncompatiblePotentials}"/>
+            <TextBlock Grid.Row="4" Text="Pressed (sim only)"/>
+            <ContentPresenter Grid.Row="4" Grid.Column="1" Content="{Binding Pressed}"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

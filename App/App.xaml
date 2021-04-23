@@ -1,0 +1,35 @@
+﻿<Application x:Class="ElectricSketch.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ElectricSketch"
+             xmlns:view="clr-namespace:ElectricSketch.View"
+             xmlns:conv="clr-namespace:ElectricSketch.View.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/Resources/MyTreeView.xaml"/>
+                <ResourceDictionary Source="/View/Resources/MyExpander.xaml"/>
+                <ResourceDictionary Source="/View/Resources/MyContentControl.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <conv:PointConverter x:Key="pConv"/>
+            <conv:PointConverterLinear x:Key="pConvLin"/>
+            <conv:VisibilityConverter x:Key="hiddenIfFalse"/>
+            <BooleanToVisibilityConverter x:Key="collapsedIfFalse"/>
+            <conv:CollapsedIfTrue x:Key="collapsedIfTrue"/>
+            <conv:VisibleIfZero x:Key="visibleIfZero"/>
+            <conv:VisibleIfNotZero x:Key="visibleIfNotZero"/>
+            <conv:VisibleIfMoreThan x:Key="visibleIfMoreThan"/>
+            <conv:VisibleIfLessThan x:Key="visibleIfLessThan"/>
+            <conv:VisibleIfNull x:Key="visibleIfNull"/>
+            <conv:HiddenIfNull x:Key="hiddenIfNull"/>
+            <conv:CollapsedIfNull x:Key="collapsedIfNull"/>
+            <conv:LinearConverter x:Key="linConv"/>
+            <conv:LinearXYConverter x:Key="linXYConv"/>
+            <conv:LinearXYZConverter x:Key="linXYZConv"/>
+            <conv:LinearChoiceConverter x:Key="linChoiceConv"/>
+            <conv:VisibleIfEquals x:Key="visIfEquals"/>
+            <conv:LogicalNot x:Key="not"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

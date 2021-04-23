@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ElectricSketch</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <Version>0.1.0</Version>
+    <Authors>Cristian Bontas</Authors>
+    <Description>A program for designing and simulating electrical circuits.</Description>
+    <PackageProjectUrl>https://github.com/bcristian/ElectricSketch</PackageProjectUrl>
+    <Copyright>GPL v3</Copyright>
+    <RepositoryUrl>https://github.com/bcristian/ElectricSketch</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="View\Resources\Toolbar\copy.png" />
+    <None Remove="View\Resources\Toolbar\cut.png" />
+    <None Remove="View\Resources\Toolbar\import.png" />
+    <None Remove="View\Resources\Toolbar\new.png" />
+    <None Remove="View\Resources\Toolbar\open.png" />
+    <None Remove="View\Resources\Toolbar\paste.png" />
+    <None Remove="View\Resources\Toolbar\play.png" />
+    <None Remove="View\Resources\Toolbar\redo.png" />
+    <None Remove="View\Resources\Toolbar\save.png" />
+    <None Remove="View\Resources\Toolbar\stop.png" />
+    <None Remove="View\Resources\Toolbar\undo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\ElectricLib.csproj" />
+    <ProjectReference Include="..\Undo\Undo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Resources\Toolbar\Copy.png" />
+    <Resource Include="View\Resources\Toolbar\Cut.png" />
+    <Resource Include="View\Resources\Toolbar\Import.png" />
+    <Resource Include="View\Resources\Toolbar\New.png" />
+    <Resource Include="View\Resources\Toolbar\Open.png" />
+    <Resource Include="View\Resources\Toolbar\Paste.png" />
+    <Resource Include="View\Resources\Toolbar\Play.png" />
+    <Resource Include="View\Resources\Toolbar\Redo.png" />
+    <Resource Include="View\Resources\Toolbar\Save.png" />
+    <Resource Include="View\Resources\Toolbar\Stop.png" />
+    <Resource Include="View\Resources\Toolbar\Undo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
