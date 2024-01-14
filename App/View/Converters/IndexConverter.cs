@@ -14,14 +14,14 @@ namespace ElectricSketch.View.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(parameter is IList list))
+            if (parameter is not IList list)
                 return -1;
             return list.IndexOf(value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(parameter is IList list))
+            if (parameter is not IList list)
                 return null;
             return list[System.Convert.ToInt32(value)];
         }

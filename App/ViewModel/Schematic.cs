@@ -17,9 +17,7 @@ namespace ElectricSketch.ViewModel
         void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -54,16 +52,16 @@ namespace ElectricSketch.ViewModel
         /// <summary>
         /// Returns the grid position closest to the specified value.
         /// </summary>
-        public static System.Drawing.Point SnapToGrid(System.Drawing.Point p) => new System.Drawing.Point(SnapToGrid(p.X), SnapToGrid(p.Y));
-        public static System.Drawing.Point SnapToGrid(Point p) => new System.Drawing.Point(SnapToGrid(p.X), SnapToGrid(p.Y));
-        public static System.Drawing.Point SnapToGrid(double x, double y) => new System.Drawing.Point(SnapToGrid(x), SnapToGrid(y));
+        public static System.Drawing.Point SnapToGrid(System.Drawing.Point p) => new (SnapToGrid(p.X), SnapToGrid(p.Y));
+        public static System.Drawing.Point SnapToGrid(Point p) => new(SnapToGrid(p.X), SnapToGrid(p.Y));
+        public static System.Drawing.Point SnapToGrid(double x, double y) => new(SnapToGrid(x), SnapToGrid(y));
 
         /// <summary>
         /// Creates the VM from the model. Changes will not be reflected into the model, call <see cref="CreateModel"/> to obtain one for the current state.
         /// </summary>
         public Schematic(Model.Schematic sch)
         {
-            elements = new ObservableCollection<ISchematicElement>();
+            elements = [];
             Elements = new ReadOnlyObservableCollection<ISchematicElement>(elements);
 
             foreach (var dm in sch.Devices)
@@ -103,7 +101,7 @@ namespace ElectricSketch.ViewModel
         /// All selected devices.
         /// </summary>
         public ReadOnlySet<Device> SelectedDevices { get; private set; }
-        readonly HashSet<Device> selectedDevices = new HashSet<Device>();
+        readonly HashSet<Device> selectedDevices = [];
 
         public bool Select(Device dev)
         {
@@ -252,7 +250,7 @@ namespace ElectricSketch.ViewModel
                 throw new InvalidOperationException("devices to be deleted stack corrupted");
         }
 
-        readonly Stack<Device> devicesToBeDeleted = new Stack<Device>();
+        readonly Stack<Device> devicesToBeDeleted = new();
 
         class RemoveDeviceAction : Undo.UndoableAction
         {
@@ -303,7 +301,7 @@ namespace ElectricSketch.ViewModel
         void ValidateConnection(Connection conn)
         {
             if (conn == null || conn.Pins[0] == null || conn.Pins[1] == null || conn.Pins[0].Device == null || conn.Pins[1].Device == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(conn));
             if (conn.Pins[0].Device.Schematic != this || conn.Pins[1].Device.Schematic != this)
                 throw new DeviceNotInSchematicException();
             if (elements.OfType<Connection>().Contains(conn))
@@ -335,22 +333,16 @@ namespace ElectricSketch.ViewModel
             }
         }
 
-        public struct PinRef
+        public readonly struct PinRef(Device device, int index)
         {
-            public Device Device { get; }
-            public int Index { get; }
-
-            public PinRef(Device device, int index)
-            {
-                Device = device;
-                Index = index;
-            }
+            public Device Device { get; } = device;
+            public int Index { get; } = index;
         }
 
-        public static PinRef PinToRef(Pin pin) => new PinRef(pin.Device, pin.Index);
+        public static PinRef PinToRef(Pin pin) => new(pin.Device, pin.Index);
         public static PinRef[] ConnToRef(Connection conn) => new PinRef[] { PinToRef(conn.Pins[0]), PinToRef(conn.Pins[1]) };
         public static Pin PinFromRef(PinRef pin) => pin.Device.Pins[pin.Index];
-        public static Connection ConnFromRef(PinRef[] pins) => new Connection(PinFromRef(pins[0]), PinFromRef(pins[1]));
+        public static Connection ConnFromRef(PinRef[] pins) => new(PinFromRef(pins[0]), PinFromRef(pins[1]));
         public static bool Equals(Pin pin, PinRef pinRef) => pin.Device == pinRef.Device && pin.Index == pinRef.Index;
 
         public Connection FindConn(PinRef[] pins)
@@ -365,13 +357,13 @@ namespace ElectricSketch.ViewModel
                 }
             }
 
-            throw new ArgumentException();
+            throw new ArgumentException("no connection between the specified pins exists");
         }
 
         public void RemoveConnection(Connection conn, bool removeUnnecessaryJunctions)
         {
             if (conn == null || conn.Pins[0] == null || conn.Pins[1] == null || conn.Pins[0].Device == null || conn.Pins[1].Device == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(conn));
             if (conn.Pins[0].Device.Schematic != this || conn.Pins[1].Device.Schematic != this)
                 throw new DeviceNotInSchematicException();
             if (!elements.OfType<Connection>().Contains(conn))
@@ -418,7 +410,7 @@ namespace ElectricSketch.ViewModel
 
             void RemoveOrphanJunction(Pin pin)
             {
-                if (!(pin.Device is Junction junction))
+                if (pin.Device is not Junction junction)
                     return;
 
                 // Ignore devices that will be deleted, or we'd go in a loop.
@@ -489,7 +481,7 @@ namespace ElectricSketch.ViewModel
             foreach (var e in elements)
             {
                 if (e is Connection conn)
-                    m.Connections.Add(new Model.PinInfo[] { PinInfo(conn.Pins[0]), PinInfo(conn.Pins[1]) });
+                    m.Connections.Add([PinInfo(conn.Pins[0]), PinInfo(conn.Pins[1])]);
             }
 
             return m;

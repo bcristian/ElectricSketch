@@ -14,9 +14,7 @@ namespace ElectricSketch.View
         void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -29,10 +27,8 @@ namespace ElectricSketch.View
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (!(DataContext is ViewModel.Connection conn))
-                return;
-
-            ConnVM = conn;
+            if (DataContext is ViewModel.Connection conn)
+                ConnVM = conn;
         }
 
         void OnLoaded(object sender, RoutedEventArgs e)
@@ -90,6 +86,6 @@ namespace ElectricSketch.View
         /// </summary>
         public double MidX => (LeftA + LeftB) / 2;
         public double MidY => (TopA + TopB) / 2;
-        public System.Windows.Point Mid => new System.Windows.Point(MidX, MidY);
+        public System.Windows.Point Mid => new(MidX, MidY);
     }
 }

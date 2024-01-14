@@ -17,20 +17,26 @@ namespace ElectricSketch.View
         {
             start = dragStart;
 
-            adornerCanvas = new Canvas();
-            adornerCanvas.Background = Brushes.Transparent;
+            adornerCanvas = new Canvas
+            {
+                Background = Brushes.Transparent
+            };
 
-            visualChildren = new VisualCollection(this);
-            visualChildren.Add(adornerCanvas);
+            visualChildren = new VisualCollection(this)
+            {
+                adornerCanvas
+            };
 
-            selShape = new Rectangle();
-            selShape.Stroke = Brushes.Navy;
-            selShape.StrokeThickness = 1;
-            selShape.StrokeDashArray = new DoubleCollection(new double[] { 2 });
+            selShape = new Rectangle
+            {
+                Stroke = Brushes.Navy,
+                StrokeThickness = 1,
+                StrokeDashArray = new DoubleCollection(new double[] { 2 })
+            };
 
             adornerCanvas.Children.Add(selShape);
 
-            wasSelected = new Dictionary<ViewModel.Device, bool>();
+            wasSelected = [];
             foreach (var dev in canvas.Schematic.Elements.OfType<ViewModel.Device>())
                 wasSelected[dev] = dev.IsSelected;
         }

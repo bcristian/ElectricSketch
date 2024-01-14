@@ -34,10 +34,10 @@ namespace ElectricLib
 
         public Schematic()
         {
-            devices = new List<IDevice>();
+            devices = [];
             Devices = devices.AsReadOnly();
 
-            connections = new List<Connection>();
+            connections = [];
             Connections = connections.AsReadOnly();
         }
 
@@ -81,7 +81,7 @@ namespace ElectricLib
             if (pins.Length < 2)
                 throw new ArgumentException("At least 2 pins are needed to form a connection");
 
-            List<Connection> connectionsToMerge = new List<Connection>();
+            List<Connection> connectionsToMerge = [];
             foreach (var pin in pins)
             {
                 if (pin.Device == null)
@@ -134,7 +134,7 @@ namespace ElectricLib
     {
         public Connection()
         {
-            pins = new HashSet<Pin>();
+            pins = [];
             Pins = pins.AsReadOnly();
         }
 

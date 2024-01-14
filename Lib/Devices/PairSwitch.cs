@@ -97,7 +97,7 @@ namespace ElectricLib.Devices
         /// </summary>
         public bool AllowIncompatiblePotentials { get; set; } = true;
 
-        internal override PairSwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new PairSwitchSim(this, sim, pins);
+        internal override PairSwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
 

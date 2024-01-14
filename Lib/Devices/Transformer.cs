@@ -79,7 +79,7 @@ namespace ElectricLib.Devices
         public Hz OutFrequency { get; set; } = new Hz(50);
 
 
-        internal override TransformerSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new TransformerSim(this, sim, pins);
+        internal override TransformerSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
     public class TransformerSim : DeviceSimulation

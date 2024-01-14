@@ -56,7 +56,7 @@ namespace ElectricSketch
             catch { }
         }
 
-        public static readonly RoutedUICommand OpenRecentFileCommand = new RoutedUICommand();
+        public static readonly RoutedUICommand OpenRecentFileCommand = new();
 
         bool IsItOKToDiscardCurrentData()
         {
@@ -135,7 +135,7 @@ namespace ElectricSketch
                 e.Cancel = true;
         }
 
-        public static readonly RoutedUICommand ImportCommand = new RoutedUICommand();
+        public static readonly RoutedUICommand ImportCommand = new();
 
         private void OnImport(object sender, ExecutedRoutedEventArgs e)
         {
@@ -313,7 +313,7 @@ namespace ElectricSketch
                 RaisePropertyChanged();
             }
         }
-        ViewModel.Library library = new ViewModel.Library();
+        ViewModel.Library library = new();
 
 
         public string StatusText
@@ -384,7 +384,7 @@ namespace ElectricSketch
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is ElectricLib.CircuitError err))
+            if (value is not ElectricLib.CircuitError err)
                 return string.Empty;
 
             return err.Code switch

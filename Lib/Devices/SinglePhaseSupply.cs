@@ -55,7 +55,7 @@ namespace ElectricLib.Devices
             }
         }
 
-        internal override SinglePhaseSupplySim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new SinglePhaseSupplySim(this, sim, pins);
+        internal override SinglePhaseSupplySim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
     public class SinglePhaseSupplySim : DeviceSimulation

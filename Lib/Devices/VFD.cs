@@ -104,7 +104,7 @@ namespace ElectricLib.Devices
         public Hz OutFrequency { get; set; } = new Hz(400);
 
 
-        internal override VFDSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new VFDSim(this, sim, pins);
+        internal override VFDSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
     public enum VFDPin
@@ -237,7 +237,7 @@ namespace ElectricLib.Devices
 
         class CmdCons : ISinglePhaseConsumer
         {
-            public static readonly Volt CmdVoltage = new Volt(24);
+            public static readonly Volt CmdVoltage = new(24);
             public Volt? Voltage => CmdVoltage;
             public float VoltageTolerance => 0;
             public Hz? Frequency => Hz.DC;

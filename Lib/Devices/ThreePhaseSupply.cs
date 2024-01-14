@@ -35,7 +35,7 @@ namespace ElectricLib.Devices
         public Pin S => L[1];
         public Pin T => L[2];
 
-        internal override ThreePhaseSupplySim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new ThreePhaseSupplySim(this, sim, pins);
+        internal override ThreePhaseSupplySim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
     public class ThreePhaseSupplySim : DeviceSimulation

@@ -151,7 +151,7 @@ namespace ElectricLib.Devices
         }
         int position;
 
-        internal override RotarySwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new RotarySwitchSim(this, this, sim, pins);
+        internal override RotarySwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, this, sim, pins);
     }
 
     internal interface IRotarySwitch

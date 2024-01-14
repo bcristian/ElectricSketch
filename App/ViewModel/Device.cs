@@ -18,9 +18,7 @@ namespace ElectricSketch.ViewModel
         protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -318,13 +316,11 @@ namespace ElectricSketch.ViewModel
         public virtual void PrevRelease() { }
     }
 
-    public abstract class TypedDevice<TModel, TBase, TSim> : Device
+    public abstract class TypedDevice<TModel, TBase, TSim>(TModel m) : Device(m)
         where TBase : IDevice, new()
         where TModel : Model.TypedDevice<TBase>, new()
         where TSim : DeviceSimulation
     {
-        public TypedDevice(TModel m) : base(m) { }
-
         public TBase TypedFunctional => functional ??= new TBase();
         protected TBase functional;
 

@@ -84,7 +84,7 @@ namespace ElectricLib.Devices
         /// </summary>
         public bool AllowIncompatiblePotentials { get; set; }
 
-        internal override NpstSwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new NpstSwitchSim(this, sim, pins);
+        internal override NpstSwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
 

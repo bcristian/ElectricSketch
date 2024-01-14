@@ -19,9 +19,7 @@ namespace ElectricSketch.ViewModel
         protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -136,15 +134,12 @@ namespace ElectricSketch.ViewModel
         }
     }
 
-    public sealed class Voltage : TypedDeviceProperty<float>
+    public sealed class Voltage(Device device, string property, Func<float> get, Action<float> set) : TypedDeviceProperty<float>(device, property, true, get, set)
     {
-        public Voltage(Device device, string property, Func<float> get, Action<float> set) : base(device, property, true, get, set) { }
     }
 
-    public sealed class NullableVoltage : TypedDeviceProperty<float?>
+    public sealed class NullableVoltage(Device device, string property, Func<float?> get, Action<float?> set) : TypedDeviceProperty<float?>(device, property, true, get, set)
     {
-        public NullableVoltage(Device device, string property, Func<float?> get, Action<float?> set) : base(device, property, true, get, set) { }
-
         public static float? Convert(ElectricLib.Volt? v) => v.HasValue ? v.Value.Value : (float?)null;
         public static ElectricLib.Volt? Convert(float? v) => v.HasValue ? new ElectricLib.Volt(v.Value) : (ElectricLib.Volt?)null;
 
@@ -175,15 +170,12 @@ namespace ElectricSketch.ViewModel
         }
     }
 
-    public sealed class Frequency : TypedDeviceProperty<float>
+    public sealed class Frequency(Device device, string property, Func<float> get, Action<float> set) : TypedDeviceProperty<float>(device, property, true, get, set)
     {
-        public Frequency(Device device, string property, Func<float> get, Action<float> set) : base(device, property, true, get, set) { }
     }
 
-    public sealed class NullableFrequency : TypedDeviceProperty<float?>
+    public sealed class NullableFrequency(Device device, string property, Func<float?> get, Action<float?> set) : TypedDeviceProperty<float?>(device, property, true, get, set)
     {
-        public NullableFrequency(Device device, string property, Func<float?> get, Action<float?> set) : base(device, property, true, get, set) { }
-
         public static float? Convert(ElectricLib.Hz? v) => v.HasValue ? v.Value.Value : (float?)null;
         public static ElectricLib.Hz? Convert(float? v) => v.HasValue ? new ElectricLib.Hz(v.Value) : (ElectricLib.Hz?)null;
 
@@ -214,38 +206,31 @@ namespace ElectricSketch.ViewModel
         }
     }
 
-    public sealed class NumPoles : TypedDeviceProperty<int>
+    public sealed class NumPoles(Device device, string property, Func<int> get, Action<int> set) : TypedDeviceProperty<int>(device, property, true, get, set)
     {
-        public NumPoles(Device device, string property, Func<int> get, Action<int> set) : base(device, property, true, get, set) { }
     }
 
-    public sealed class NumPositions : TypedDeviceProperty<int>
+    public sealed class NumPositions(Device device, string property, Func<int> get, Action<int> set) : TypedDeviceProperty<int>(device, property, true, get, set)
     {
-        public NumPositions(Device device, string property, Func<int> get, Action<int> set) : base(device, property, true, get, set) { }
     }
 
-    public sealed class CurrentPosition : TypedDeviceProperty<int>
+    public sealed class CurrentPosition(Device device, string property, Func<int> get, Action<int> set) : TypedDeviceProperty<int>(device, property, false, get, set)
     {
-        public CurrentPosition(Device device, string property, Func<int> get, Action<int> set) : base(device, property, false, get, set) { }
     }
 
-    public sealed class DesignOnlyBoolean : TypedDeviceProperty<bool>
+    public sealed class DesignOnlyBoolean(Device device, string property, Func<bool> get, Action<bool> set) : TypedDeviceProperty<bool>(device, property, true, get, set)
     {
-        public DesignOnlyBoolean(Device device, string property, Func<bool> get, Action<bool> set) : base(device, property, true, get, set) { }
     }
 
-    public sealed class Boolean : TypedDeviceProperty<bool>
+    public sealed class Boolean(Device device, string property, Func<bool> get, Action<bool> set, bool supportsUndo = true) : TypedDeviceProperty<bool>(device, property, false, get, set, supportsUndo)
     {
-        public Boolean(Device device, string property, Func<bool> get, Action<bool> set, bool supportsUndo = true) : base(device, property, false, get, set, supportsUndo) { }
     }
 
-    public sealed class Percent : TypedDeviceProperty<float>
+    public sealed class Percent(Device device, string property, Func<float> get, Action<float> set) : TypedDeviceProperty<float>(device, property, true, get, set)
     {
-        public Percent(Device device, string property, Func<float> get, Action<float> set) : base(device, property, true, get, set) { }
     }
 
-    public sealed class Duration : TypedDeviceProperty<TimeSpan>
+    public sealed class Duration(Device device, string property, Func<TimeSpan> get, Action<TimeSpan> set) : TypedDeviceProperty<TimeSpan>(device, property, true, get, set)
     {
-        public Duration(Device device, string property, Func<TimeSpan> get, Action<TimeSpan> set) : base(device, property, true, get, set) { }
     }
 }

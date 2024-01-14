@@ -115,7 +115,7 @@ namespace ElectricSketch.ViewModel
         public string Name { get; set; }
         //public BitmapImage Icon { get; set; }
 
-        public ObservableCollection<LibraryFolder> Folders { get; } = new ObservableCollection<LibraryFolder>();
-        public ObservableCollection<Device> Components { get; } = new ObservableCollection<Device>();
+        public ObservableCollection<LibraryFolder> Folders { get; } = [];
+        public ObservableCollection<Device> Components { get; } = [];
     }
 }

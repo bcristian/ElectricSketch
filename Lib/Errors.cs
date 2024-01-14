@@ -23,7 +23,7 @@ namespace ElectricLib
         internal CircuitError(ErrorCode code)
         {
             Code = code;
-            Pins = new List<Pin>();
+            Pins = [];
         }
         internal CircuitError(ErrorCode code, IEnumerable<Pin> pins)
         {
@@ -32,16 +32,10 @@ namespace ElectricLib
         }
     }
 
-    public class SimException : ApplicationException
+    public class SimException(ErrorCode errorCode, IDevice device) : ApplicationException
     {
-        public SimException(ErrorCode errorCode, IDevice device)
-        {
-            ErrorCode = errorCode;
-            Device = device;
-        }
-
-        public ErrorCode ErrorCode { get; }
-        public IDevice Device { get; }
+        public ErrorCode ErrorCode { get; } = errorCode;
+        public IDevice Device { get; } = device;
     }
 
     public enum ErrorCode

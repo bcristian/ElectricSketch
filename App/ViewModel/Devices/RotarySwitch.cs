@@ -30,10 +30,10 @@ namespace ElectricSketch.ViewModel.Devices
                 () => momentaryLastPosition,
                 (v) => momentaryLastPosition = v);
 
-            poles = new ObservableCollection<RotaryPole>();
+            poles = [];
             Poles = new ReadOnlyObservableCollection<RotaryPole>(poles);
 
-            positions = new ObservableCollection<RotaryPosition>();
+            positions = [];
             Positions = new ReadOnlyObservableCollection<RotaryPosition>(positions);
 
             // We need to force the creation of the associated state, which will not happen if the value happens to be the one the functional was created with.
@@ -263,9 +263,7 @@ namespace ElectricSketch.ViewModel.Devices
         protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -302,27 +300,19 @@ namespace ElectricSketch.ViewModel.Devices
     /// <summary>
     /// An abstract device position. Used so that the view can enumerate them in order to create visuals for each.
     /// </summary>
-    public class RotaryPosition : INotifyPropertyChanged
+    public class RotaryPosition(RotarySwitch sw, int index) : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        public RotaryPosition(RotarySwitch sw, int index)
-        {
-            Switch = sw;
-            Index = index;
-        }
-
-        public RotarySwitch Switch { get; }
-        public int Index { get; }
+        public RotarySwitch Switch { get; } = sw;
+        public int Index { get; } = index;
 
 
         // Relative to the pole's canvas.

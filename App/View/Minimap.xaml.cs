@@ -57,7 +57,7 @@ namespace ElectricSketch.View
 
             myCanvas.Background = new VisualBrush(targetCanvas) { Stretch = Stretch.Uniform };
 
-            if (!(targetCanvas.LayoutTransform is ScaleTransform targetScaler))
+            if (targetCanvas.LayoutTransform is not ScaleTransform targetScaler)
             {
                 if (targetCanvas.LayoutTransform != Transform.Identity)
                     throw new ArgumentException("The target canvas already has a different layout transform");
@@ -78,7 +78,7 @@ namespace ElectricSketch.View
                 return;
             }
 
-            if (!(targetCanvas.LayoutTransform is ScaleTransform targetScaler))
+            if (targetCanvas.LayoutTransform is not ScaleTransform targetScaler)
                 return;
 
             var scrollViewer = targetCanvas.FindAncestor<ScrollViewer>();
@@ -117,7 +117,7 @@ namespace ElectricSketch.View
             var targetCanvas = Target;
             if (targetCanvas == null)
                 return;
-            if (!(targetCanvas.LayoutTransform is ScaleTransform targetScaler))
+            if (targetCanvas.LayoutTransform is not ScaleTransform targetScaler)
                 return;
             var scrollViewer = targetCanvas.FindAncestor<ScrollViewer>();
             if (scrollViewer == null)
@@ -136,7 +136,7 @@ namespace ElectricSketch.View
             var targetCanvas = Target;
             if (targetCanvas == null)
                 return;
-            if (!(targetCanvas.LayoutTransform is ScaleTransform targetScaler))
+            if (targetCanvas.LayoutTransform is not ScaleTransform targetScaler)
                 return;
             var scrollViewer = targetCanvas.FindAncestor<ScrollViewer>();
             if (scrollViewer == null)

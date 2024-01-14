@@ -121,7 +121,7 @@ namespace ElectricLib.Devices
         }
         int position;
 
-        internal override CamSwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new CamSwitchSim(this, sim, pins);
+        internal override CamSwitchSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
     public sealed class CamSwitchSim : DeviceSimulation

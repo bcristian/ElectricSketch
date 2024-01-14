@@ -61,7 +61,7 @@ namespace ElectricLib.Devices
         public Hz? MaxFrequency { get; set; }
 
 
-        internal override ThreePhaseMotorSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new ThreePhaseMotorSim(this, sim, pins);
+        internal override ThreePhaseMotorSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
 
         /// <summary>
         /// Does the specified configuration use the UVW1 pins.

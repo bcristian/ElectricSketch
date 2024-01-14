@@ -193,7 +193,7 @@ namespace ElectricLib
             // Create the connection states for the permanent connections that are not connected to any switch. These will not need to be rebuilt/updated.
             // Put those not connected to a power source in a special list, so that we can easily clear the visited mark when checking for series connections.
             // We also set their potentials at this time.
-            staticConnections = new List<ConnectionState>();
+            staticConnections = [];
             foreach (var pc in designConnections)
             {
                 bool gotSwitch = false;
@@ -232,7 +232,7 @@ namespace ElectricLib
                     staticConnections.Add(dc);
             }
 
-            dynamicConnections = new List<ConnectionState>();
+            dynamicConnections = [];
 
             // Compute the internal state.
             if (Error == null)
@@ -555,7 +555,7 @@ namespace ElectricLib
         /// <summary>
         /// The states the simulation went through on the latest update. Mostly useful for diagnosing ringing.
         /// </summary>
-        public List<bool[]> UpdateTrace { get; } = new List<bool[]>();
+        public List<bool[]> UpdateTrace { get; } = [];
 
 
 
@@ -767,7 +767,7 @@ namespace ElectricLib
             internal override void Validate() { }
         }
 
-        readonly List<PowerSource> powerSources = new List<PowerSource>();
+        readonly List<PowerSource> powerSources = [];
 
         /// <summary>
         /// Creates a power source device. The pins will correspond to the given potentials.
@@ -838,7 +838,7 @@ namespace ElectricLib
             }
         }
 
-        readonly List<Switch> switches = new List<Switch>();
+        readonly List<Switch> switches = [];
 
         internal Switch AddSwitch(IDevice device, bool closed, bool allowIncompatiblePotentials)
         {
@@ -852,19 +852,15 @@ namespace ElectricLib
         /// <summary>
         /// Something that consumes energy.
         /// </summary>
-        internal sealed class Consumer : DeviceSimulation
+        internal sealed class Consumer(IDevice device, Simulation sim, int numPins) : DeviceSimulation(device, sim, numPins)
         {
-            public Consumer(IDevice device, Simulation sim, int numPins) : base(device, sim, numPins)
-            {
-            }
-
             internal override void Update() { }
             internal override void Validate() { }
 
             // TODO add utility functions for checking the usual cases - single phase, motor, etc.
         }
 
-        readonly List<Consumer> consumers = new List<Consumer>();
+        readonly List<Consumer> consumers = [];
 
         internal Consumer AddConsumer(IDevice device, int numPins)
         {

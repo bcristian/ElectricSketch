@@ -14,7 +14,7 @@ namespace Undo
         public event PropertyChangedEventHandler PropertyChanged;
         void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 
-        readonly UndoableAction root = new UndoableAction();
+        readonly UndoableAction root = new();
 
         public UndoManager(string initialStateDescription)
         {
@@ -89,8 +89,7 @@ namespace Undo
         {
             if (State != UndoManagerState.Doing && State != UndoManagerState.Idle)
                 throw new InvalidOperationException($"Cannot do actions while state is {State}");
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
+            ArgumentNullException.ThrowIfNull(action);
 
             var parent = Stack.Peek();
             parent.CreateChildren();
@@ -175,16 +174,10 @@ namespace Undo
             return new UndoBatchScope(this);
         }
 
-        class UndoBatchScope : IDisposable
+        class UndoBatchScope(UndoManager manager) : IDisposable
         {
-            public UndoBatchScope(UndoManager manager)
-            {
-                this.manager = manager ?? throw new ArgumentNullException();
-                batch = manager.Stack.Peek();
-            }
-
-            readonly UndoManager manager;
-            readonly UndoableAction batch;
+            readonly UndoManager manager = manager ?? throw new ArgumentNullException();
+            readonly UndoableAction batch = manager.Stack.Peek();
 
             public void Dispose()
             {
@@ -223,11 +216,10 @@ namespace Undo
         /// </summary>
         public void GoToStateAfterAction(UndoableAction action)
         {
-            if (action == null)
-                throw new ArgumentNullException(nameof(action));
+            ArgumentNullException.ThrowIfNull(action);
             var index = root.Children.IndexOf(action);
             if (index < 0)
-                throw new ArgumentException(nameof(action));
+                throw new ArgumentException("The specified action is not found", nameof(action));
 
             while (index < root.LatestChildIndex)
                 Undo();

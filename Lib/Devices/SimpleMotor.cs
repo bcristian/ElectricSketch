@@ -7,20 +7,15 @@ namespace ElectricLib.Devices
     /// <summary>
     /// A two-wire motor, AC or DC. In AC mode it turns clockwise. In DC mode the direction depends on polarity.
     /// </summary>
-    public class SimpleMotor : SinglePhaseConsumer<SimpleMotorSim>
+    public class SimpleMotor(string name) : SinglePhaseConsumer<SimpleMotorSim>((device, simulation, pins) => new SimpleMotorSim((SimpleMotor)device, simulation, pins), name)
     {
         public override string DefaultNamePrefix => "M";
 
         public SimpleMotor() : this(null) { }
-        public SimpleMotor(string name) : base((device, simulation, pins) => new SimpleMotorSim((SimpleMotor)device, simulation, pins), name) { }
     }
 
-    public class SimpleMotorSim : SinglePhaseConsumerSim
+    public class SimpleMotorSim(SimpleMotor device, Simulation simulation, ArraySegment<PinSim> pins) : SinglePhaseConsumerSim(device, device, simulation, pins)
     {
-        public SimpleMotorSim(SimpleMotor device, Simulation simulation, ArraySegment<PinSim> pins) : base(device, device, simulation, pins)
-        {
-        }
-
         public TurnDirection TurnDirection
         {
             get

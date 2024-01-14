@@ -5,14 +5,9 @@ using System.Text;
 
 namespace ElectricLib
 {
-    public class ReadOnlySet<T> : ISet<T>
+    public class ReadOnlySet<T>(ISet<T> set) : ISet<T>
     {
-        public ReadOnlySet(ISet<T> set)
-        {
-            this.set = set;
-        }
-
-        readonly ISet<T> set;
+        readonly ISet<T> set = set;
 
         public int Count => set.Count;
         public bool IsReadOnly => true;
@@ -38,6 +33,6 @@ namespace ElectricLib
 
     public static class ReadOnlySetExt
     {
-        public static ReadOnlySet<T> AsReadOnly<T>(this ISet<T> set) => new ReadOnlySet<T>(set);
+        public static ReadOnlySet<T> AsReadOnly<T>(this ISet<T> set) => new(set);
     }
 }

@@ -212,8 +212,7 @@ namespace ElectricSketch.ViewModel.Devices
         }
     }
 
-    public sealed class VFDSupply : TypedDeviceProperty<ElectricLib.Devices.VFDSupply>
+    public sealed class VFDSupply(Device device, string property, Func<ElectricLib.Devices.VFDSupply> get, Action<ElectricLib.Devices.VFDSupply> set) : TypedDeviceProperty<ElectricLib.Devices.VFDSupply>(device, property, true, get, set)
     {
-        public VFDSupply(Device device, string property, Func<ElectricLib.Devices.VFDSupply> get, Action<ElectricLib.Devices.VFDSupply> set) : base(device, property, true, get, set) { }
     }
 }

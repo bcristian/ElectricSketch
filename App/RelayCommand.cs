@@ -5,16 +5,10 @@ using System.Windows.Input;
 
 namespace ElectricSketch
 {
-    public sealed class RelayCommand : ICommand
+    public sealed class RelayCommand(Action execute, Func<bool> canExecute = null) : ICommand
     {
-        readonly Action execute;
-        readonly Func<bool> canExecute;
-
-        public RelayCommand(Action execute, Func<bool> canExecute = null)
-        {
-            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this.canExecute = canExecute;
-        }
+        readonly Action execute = execute ?? throw new ArgumentNullException(nameof(execute));
+        readonly Func<bool> canExecute = canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -27,16 +21,10 @@ namespace ElectricSketch
         public void Execute(object parameter) => execute();
     }
 
-    public sealed class RelayCommand<T> : ICommand
+    public sealed class RelayCommand<T>(Action<T> execute, Func<T, bool> canExecute = null) : ICommand
     {
-        readonly Action<T> execute;
-        readonly Func<T, bool> canExecute;
-
-        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
-        {
-            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this.canExecute = canExecute;
-        }
+        readonly Action<T> execute = execute ?? throw new ArgumentNullException(nameof(execute));
+        readonly Func<T, bool> canExecute = canExecute;
 
         public event EventHandler CanExecuteChanged
         {

@@ -21,7 +21,7 @@ namespace ElectricSketch.ViewModel.Devices
                 () => functional.AllowIncompatiblePotentials,
                 (v) => functional.AllowIncompatiblePotentials = v);
 
-            contacts = new ObservableCollection<CamContact>();
+            contacts = [];
             Contacts = new ReadOnlyObservableCollection<CamContact>(contacts);
 
             // We need to force the creation of the associated state, which will not happen if the value happens to be the one the functional was created with.
@@ -206,9 +206,7 @@ namespace ElectricSketch.ViewModel.Devices
         protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -218,7 +216,7 @@ namespace ElectricSketch.ViewModel.Devices
             Switch = sw;
             Index = index;
 
-            positions = new ObservableCollection<CamPosition>();
+            positions = [];
             Positions = new ReadOnlyObservableCollection<CamPosition>(positions);
             OnNumPositionsChanged();
 
@@ -268,27 +266,19 @@ namespace ElectricSketch.ViewModel.Devices
     /// <summary>
     /// An abstract device position. Used so that the view can enumerate them in order to create visuals for each.
     /// </summary>
-    public class CamPosition : INotifyPropertyChanged
+    public class CamPosition(CamContact contact, int index) : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        public CamPosition(CamContact contact, int index)
-        {
-            Contact = contact;
-            Index = index;
-        }
-
-        public CamContact Contact { get; }
-        public int Index { get; }
+        public CamContact Contact { get; } = contact;
+        public int Index { get; } = index;
 
         public bool Pattern
         {
@@ -424,18 +414,18 @@ namespace ElectricSketch.ViewModel.Devices
             System.Diagnostics.Debug.Assert(other.multipleDeviceChanges == null);
 
             if (singleDeviceChanges == null)
-                multipleDeviceChanges = new List<Dictionary<ContactAndPosition, bool>>()
-                {
+                multipleDeviceChanges =
+                [
                     new Dictionary<ContactAndPosition, bool>() { { new ContactAndPosition() { contact = singleChange.contact, position = singleChange.position }, singleChange.value } },
                     new Dictionary<ContactAndPosition, bool>() { { new ContactAndPosition() { contact = other.singleChange.contact, position = other.singleChange.position }, other.singleChange.value } }
-                };
+                ];
             else
             {
-                multipleDeviceChanges = new List<Dictionary<ContactAndPosition, bool>>()
-                {
+                multipleDeviceChanges =
+                [
                     singleDeviceChanges,
                     new Dictionary<ContactAndPosition, bool>() { { new ContactAndPosition() { contact = other.singleChange.contact, position = other.singleChange.position }, other.singleChange.value } }
-                };
+                ];
 
                 singleDeviceChanges = null;
             }

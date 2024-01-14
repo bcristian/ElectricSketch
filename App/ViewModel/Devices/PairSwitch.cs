@@ -23,7 +23,7 @@ namespace ElectricSketch.ViewModel.Devices
                 (v) => functional.AllowIncompatiblePotentials = v);
             Pressed = new Boolean(this, nameof(Pressed), GetPressed, SetPressed, false);
 
-            poles = new ObservableCollection<PairPole>();
+            poles = [];
             Poles = new ReadOnlyObservableCollection<PairPole>(poles);
 
             SetPinOffsets(0, Pins.Count);
@@ -147,24 +147,17 @@ namespace ElectricSketch.ViewModel.Devices
     /// <summary>
     /// An abstract device pole. Used so that the view can enumerate them in order to create visuals for each.
     /// </summary>
-    public class PairPole : INotifyPropertyChanged
+    public class PairPole(int index) : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        public PairPole(int index)
-        {
-            Index = index;
-        }
-
-        public int Index { get; }
+        public int Index { get; } = index;
     }
 }

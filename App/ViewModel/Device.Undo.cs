@@ -5,19 +5,15 @@ using Undo;
 
 namespace ElectricSketch.ViewModel
 {
-    public abstract class PropertyChangeAction<T> : UndoableAction where T : class
+    public abstract class PropertyChangeAction<T>(T device) : UndoableAction where T : class
     {
-        public PropertyChangeAction(T device)
-        {
-            this.device = device;
-        }
 
         // We want to group changes that affect several devices, e.g. a batch rename or moving several selected devices.
         // But since the merging only happens after the new action is created, it's better if we don't allocate lists with
         // one element only to merge them immediately after.
 
         // Only set if this is a single-device change.
-        public T device;
+        public T device = device;
 
         // Only created if this change affects several devices. The original will be added to the list and the field set to null.
         public List<T> devices;
@@ -113,23 +109,16 @@ namespace ElectricSketch.ViewModel
 
         // Use this in derived types for storing the old/new values.
         // This class uses reflection to automatically merge them.
-        protected class OneOrMore<SomeType>
+        protected class OneOrMore<SomeType>(SomeType oldValue, SomeType newValue, Action<T, SomeType> setter)
         {
-            public SomeType oneOld;
-            public SomeType oneNew;
+            public SomeType oneOld = oldValue;
+            public SomeType oneNew = newValue;
             public List<SomeType> moreOld;
             public List<SomeType> moreNew;
-            public Action<T, SomeType> setter;
+            public Action<T, SomeType> setter = setter;
 
             public SomeType New(int index) => index < 0 ? oneNew : moreNew[index];
             public SomeType Old(int index) => index < 0 ? oneOld : moreOld[index];
-
-            public OneOrMore(SomeType oldValue, SomeType newValue, Action<T, SomeType> setter)
-            {
-                oneOld = oldValue;
-                oneNew = newValue;
-                this.setter = setter;
-            }
 
             public void Set(T device, SomeType value) => setter?.Invoke(device, value);
 
@@ -140,9 +129,9 @@ namespace ElectricSketch.ViewModel
 
             public void SwitchOneToMany(OneOrMore<SomeType> other)
             {
-                moreOld = new List<SomeType>() { oneOld, other.oneOld };
+                moreOld = [oneOld, other.oneOld];
                 oneOld = default;
-                moreNew = new List<SomeType>() { oneNew, other.oneNew };
+                moreNew = [oneNew, other.oneNew];
                 oneNew = default;
             }
 
@@ -192,7 +181,7 @@ namespace ElectricSketch.ViewModel
             {
                 if (oneOrMoreFields == null)
                 {
-                    oneOrMoreFields = new List<OneOrModeField>();
+                    oneOrMoreFields = [];
 
                     var fields = GetType().GetFields(
                         System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);

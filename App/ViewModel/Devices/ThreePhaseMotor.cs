@@ -174,8 +174,7 @@ namespace ElectricSketch.ViewModel.Devices
         }
     }
 
-    public sealed class ThreePhaseMotorConfig : TypedDeviceProperty<ElectricLib.Devices.ThreePhaseMotorConfig>
+    public sealed class ThreePhaseMotorConfig(Device device, string property, Func<ElectricLib.Devices.ThreePhaseMotorConfig> get, Action<ElectricLib.Devices.ThreePhaseMotorConfig> set) : TypedDeviceProperty<ElectricLib.Devices.ThreePhaseMotorConfig>(device, property, true, get, set)
     {
-        public ThreePhaseMotorConfig(Device device, string property, Func<ElectricLib.Devices.ThreePhaseMotorConfig> get, Action<ElectricLib.Devices.ThreePhaseMotorConfig> set) : base(device, property, true, get, set) { }
     }
 }

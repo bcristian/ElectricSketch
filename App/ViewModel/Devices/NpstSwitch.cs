@@ -22,7 +22,7 @@ namespace ElectricSketch.ViewModel.Devices
                 () => functional.AllowIncompatiblePotentials,
                 (v) => functional.AllowIncompatiblePotentials = v);
 
-            poles = new ObservableCollection<NpstPole>();
+            poles = [];
             Poles = new ReadOnlyObservableCollection<NpstPole>(poles);
 
             Pins.CollectionChanged += OnPinsCollectionChanged;
@@ -227,26 +227,18 @@ namespace ElectricSketch.ViewModel.Devices
     /// <summary>
     /// An abstract device pole. Used so that the view can enumerate them in order to create visuals for each.
     /// </summary>
-    public class NpstPole : INotifyPropertyChanged
+    public class NpstPole(int index, double offset) : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string property = null)
         {
 #if DEBUG
-            var pi = GetType().GetProperty(property);
-            if (pi == null)
-                throw new ArgumentException($"Property {property} not found on {this}");
+            var pi = GetType().GetProperty(property) ?? throw new ArgumentException($"Property {property} not found on {this}");
 #endif
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        public NpstPole(int index, double offset)
-        {
-            Index = index;
-            Offset = offset;
-        }
-
-        public int Index { get; }
-        public double Offset { get; }
+        public int Index { get; } = index;
+        public double Offset { get; } = offset;
     }
 }

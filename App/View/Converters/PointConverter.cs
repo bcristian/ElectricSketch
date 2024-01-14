@@ -15,8 +15,8 @@ namespace ElectricSketch.View.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Convert((System.Windows.Point)value);
 
-        public static System.Windows.Point Convert(System.Drawing.Point p) => new System.Windows.Point(p.X, p.Y);
-        public static System.Drawing.Point Convert(System.Windows.Point p) => new System.Drawing.Point((int)Math.Round(p.X, MidpointRounding.ToZero), (int)Math.Round(p.Y, MidpointRounding.ToZero));
+        public static System.Windows.Point Convert(System.Drawing.Point p) => new(p.X, p.Y);
+        public static System.Drawing.Point Convert(System.Windows.Point p) => new((int)Math.Round(p.X, MidpointRounding.ToZero), (int)Math.Round(p.Y, MidpointRounding.ToZero));
     }
 
     /// <summary>

@@ -69,7 +69,7 @@ namespace Undo
         {
             if (children == null)
             {
-                children = new ObservableCollection<UndoableAction>();
+                children = [];
                 Children = new ReadOnlyObservableCollection<UndoableAction>(children);
             }
         }

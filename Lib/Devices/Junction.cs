@@ -19,7 +19,7 @@ namespace ElectricLib.Devices
 
         public Pin Pin { get; }
 
-        internal override JunctionSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new JunctionSim(this, sim, pins);
+        internal override JunctionSim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
     }
 
     public class JunctionSim : DeviceSimulation

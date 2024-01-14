@@ -261,7 +261,7 @@ namespace ElectricSketch.View
             e.Handled = true;
         }
 
-        readonly List<ViewModel.Pin> addConnPins = new List<ViewModel.Pin>();
+        readonly List<ViewModel.Pin> addConnPins = [];
         bool connectByDragging;
         UndoableAction addConnAction;
 
@@ -513,7 +513,7 @@ namespace ElectricSketch.View
         System.Drawing.Point minDragDevPos;
         TimeSpan? normalMergeTimeLimit;
 
-        readonly Dictionary<ViewModel.Device, System.Drawing.Point> deviceDragPos = new Dictionary<ViewModel.Device, System.Drawing.Point>();
+        readonly Dictionary<ViewModel.Device, System.Drawing.Point> deviceDragPos = [];
 
         void DragDevices_OnMouseMove(MouseEventArgs e)
         {
@@ -720,7 +720,7 @@ namespace ElectricSketch.View
         {
             base.OnDrop(e);
 
-            if (!(e.Data.GetData("Electrical Device") is ViewModel.Device dev))
+            if (e.Data.GetData("Electrical Device") is not ViewModel.Device dev)
                 return;
 
             Schematic.UnselectAll();
@@ -816,7 +816,7 @@ namespace ElectricSketch.View
 
         void OnPaste(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Clipboard.GetData("Electrical Device List") is List<Model.Device> devs))
+            if (Clipboard.GetData("Electrical Device List") is not List<Model.Device> devs)
                 return;
 
             Schematic.UnselectAll();

@@ -19,12 +19,10 @@ namespace ElectricSketch.ViewModel
 
         public static void Save()
         {
-            Settings.Default.RecentFiles = new System.Collections.Specialized.StringCollection();
-            foreach (var s in List)
-                Settings.Default.RecentFiles.Add(s);
+            Settings.Default.RecentFiles = [.. List];
             Settings.Default.Save();
         }
 
-        public static ObservableCollection<string> List { get; set; } = new ObservableCollection<string>();
+        public static ObservableCollection<string> List { get; set; } = [];
     }
 }

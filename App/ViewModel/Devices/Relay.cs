@@ -43,7 +43,7 @@ namespace ElectricSketch.ViewModel.Devices
                 () => functional.AllowIncompatiblePotentials,
                 (v) => functional.AllowIncompatiblePotentials = v);
 
-            poles = new ObservableCollection<RelayPole>();
+            poles = [];
             Poles = new ReadOnlyObservableCollection<RelayPole>(poles);
 
             // The coil is down, and the poles are arranged from there.
@@ -296,18 +296,12 @@ namespace ElectricSketch.ViewModel.Devices
     /// <summary>
     /// An abstract device pole. Used so that the view can enumerate them in order to create visuals for each.
     /// </summary>
-    public class RelayPole
+    public class RelayPole(int index)
     {
-        public RelayPole(int index)
-        {
-            Index = index;
-        }
-
-        public int Index { get; }
+        public int Index { get; } = index;
     }
 
-    public sealed class RelayFunction : TypedDeviceProperty<ElectricLib.Devices.RelayFunction>
+    public sealed class RelayFunction(Device device, string property, Func<ElectricLib.Devices.RelayFunction> get, Action<ElectricLib.Devices.RelayFunction> set) : TypedDeviceProperty<ElectricLib.Devices.RelayFunction>(device, property, true, get, set)
     {
-        public RelayFunction(Device device, string property, Func<ElectricLib.Devices.RelayFunction> get, Action<ElectricLib.Devices.RelayFunction> set) : base(device, property, true, get, set) { }
     }
 }

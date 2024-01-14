@@ -8,9 +8,6 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:Schematic, IsDesignTimeCreatable=True}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <view:PinPosition x:Key="ppConv"/>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

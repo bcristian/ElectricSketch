@@ -150,7 +150,7 @@ namespace ElectricLib.Devices
         public bool AllowIncompatiblePotentials { get; set; } = true;
 
 
-        internal override RelaySim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new RelaySim(this, sim, pins);
+        internal override RelaySim CreateSimulation(Simulation sim, ArraySegment<PinSim> pins) => new(this, sim, pins);
 
 
         public static bool FunctionUsesSignal(RelayFunction function)
